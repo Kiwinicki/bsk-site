@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 function renderHeader($title = "Moderato - faster Allegro") {
     echo <<<HTML
 <!DOCTYPE html>
@@ -31,7 +35,7 @@ function renderFooter() {
     echo <<<HTML
 </main>
 <footer>
-    <p>&copy; <?php echo date('Y'); ?> Moderato</p>
+    <p>&copy; 2024 Moderato</p>
 </footer>
 </body>
 </html>

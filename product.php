@@ -1,9 +1,13 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include_once './utils/env.php';
 include_once './utils/templates.php';
 
 $conn = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -16,6 +20,9 @@ if ($product_id > 0) {
                     JOIN categories ON products.category = categories.id 
                     WHERE products.id = $product_id";
     $product_result = $conn->query($product_sql);
+    if (!$products_result) {
+        die("Query failed: " . $conn->error);
+    }
 
     if ($product_result->num_rows > 0) {
         $product = $product_result->fetch_assoc();

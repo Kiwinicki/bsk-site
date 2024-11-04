@@ -1,10 +1,13 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include_once './utils/env.php';
 include_once './utils/templates.php';
 
 $conn = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -16,6 +19,9 @@ if ($category_name) {
 
     $category_sql = "SELECT id FROM categories WHERE catName = '$category_name'";
     $category_result = $conn->query($category_sql);
+    if (!$products_result) {
+        die("Query failed: " . $conn->error);
+    }
 
     if ($category_result->num_rows > 0) {
         $category_row = $category_result->fetch_assoc();
@@ -23,6 +29,9 @@ if ($category_name) {
 
         $products_sql = "SELECT * FROM products WHERE category = '$category_id'";
         $products_result = $conn->query($products_sql);
+        if (!$products_result) {
+            die("Query failed: " . $conn->error);
+        }        
     } else {
         echo "<p>Invalid category.</p>";
         exit;
