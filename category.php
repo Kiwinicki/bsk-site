@@ -19,7 +19,7 @@ if ($category_name) {
 
     $category_sql = "SELECT id FROM categories WHERE catName = '$category_name'";
     $category_result = $conn->query($category_sql);
-    if (!$products_result) {
+    if (!$category_result) {
         die("Query failed: " . $conn->error);
     }
 

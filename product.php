@@ -20,7 +20,7 @@ if ($product_id > 0) {
                     JOIN categories ON products.category = categories.id 
                     WHERE products.id = $product_id";
     $product_result = $conn->query($product_sql);
-    if (!$products_result) {
+    if (!$product_result) {
         die("Query failed: " . $conn->error);
     }
 
