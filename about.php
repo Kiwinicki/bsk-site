@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 include_once './utils/templates.php';
 include_once './utils/env.php';
 
-renderHeader("About us");
+renderHeader("Moderato - About us");
 
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 $siteAddress = $protocol . $_SERVER['HTTP_HOST'];
