@@ -4,7 +4,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+include_once 'env.php';
+
 function renderHeader($title = "Moderato - faster Allegro") {
+    global $captchaKey;
+    
     echo <<<HTML
 <!DOCTYPE html>
 <html lang='pl'>
@@ -16,10 +20,12 @@ function renderHeader($title = "Moderato - faster Allegro") {
     <script src='./js/search.js' ></script>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js?render=$captchaKey"></script>
 </head>
 <body>
     <header>
         <h1><a href='index.php'>Moderato</a></h1>
+        <a href="about.php">About us</a>
         <nav>
             <input type="text" id="search" placeholder="Search...">
             <div id="search-results"></div>  
