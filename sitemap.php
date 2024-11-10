@@ -10,7 +10,6 @@ echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 $domain = "https://" . $_SERVER['HTTP_HOST'];
 $pages = [
     ['loc' => "$domain/", 'priority' => '1.0'],
-    ['loc' => "$domain/index.php", 'priority' => '1.0'],
     ['loc' => "$domain/about.php", 'priority' => '0.8'],
 ];
 

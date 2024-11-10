@@ -1,0 +1,17 @@
+RewriteEngine On
+
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+RewriteRule ^sitemap\.html$ /sitemap-html.php [L]
+
+# Block common scraping bots by User-Agent, whole list on: https://www.useragentstring.com/pages/useragentstring.php?typ=Crawler
+SetEnvIf User-Agent "libwww" block_bot
+SetEnvIf User-Agent "HTTrack" block_bot
+SetEnvIf User-Agent "wget" block_bot
+SetEnvIf User-Agent "curl" block_bot
+SetEnvIf User-Agent "Scrapy" block_bot
+SetEnvIf User-Agent "python-requests" block_bot
+SetEnvIf User-Agent "bot" block_bot
+SetEnvIf User-Agent "crawler" block_bot
+
+Order Deny,Allow
+Deny from env=block_bot

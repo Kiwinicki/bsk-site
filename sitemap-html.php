@@ -9,25 +9,12 @@ header("Content-Type: text/html; charset=UTF-8");
 $domain = "https://" . $_SERVER['HTTP_HOST'];
 $pages = [
     ['link' => "$domain/", 'title' => "Moderato - Home"],
-    ['link' => "$domain/about.php", 'title' => "About us"],
+    ['link' => "$domain/about.php", 'title' => "Moderato - About us"],
 ];
 
 $conn = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-}
-
-$products_sql = "SELECT id, prodName FROM products";
-$products_result = $conn->query($products_sql);
-if ($products_result) {
-    while ($row = $products_result->fetch_assoc()) {
-        $pages[] = [
-            'link' => "$domain/product.php?id=".$row['id'],
-            'title' => $row['prodName']
-        ];
-    }
-} else {
-    die("Query failed: " . $conn->error);
 }
 
 $categories_sql = "SELECT id, catName FROM categories";
