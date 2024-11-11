@@ -1,5 +1,16 @@
 RewriteEngine On
 
+<FilesMatch "(\.htaccess|\.htpasswd|\.env)">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow access to /utils/contact.php
+RewriteCond %{REQUEST_URI} !^/utils/contact\.php$
+
+# Deny access to everything else in /utils
+RewriteRule ^utils/ - [F,L]
+
 RewriteRule ^sitemap\.xml$ sitemap.php [L]
 RewriteRule ^sitemap\.html$ /sitemap-html.php [L]
 
@@ -10,8 +21,10 @@ SetEnvIf User-Agent "wget" block_bot
 SetEnvIf User-Agent "curl" block_bot
 SetEnvIf User-Agent "Scrapy" block_bot
 SetEnvIf User-Agent "python-requests" block_bot
-SetEnvIf User-Agent "bot" block_bot
-SetEnvIf User-Agent "crawler" block_bot
+SetEnvIf User-Agent "(Bot|bot)" block_bot
+SetEnvIf User-Agent "(Crawler|crawler)" block_bot
+SetEnvIf User-Agent "HeadlessChrome" block_bot
+SetEnvIf User-Agent "Headless" block_bot
 
 Order Deny,Allow
 Deny from env=block_bot
