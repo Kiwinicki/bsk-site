@@ -47,6 +47,7 @@ function renderFooter() {
 </main>
 <footer>
     <p>&copy; 2024 Moderato</p>
+    <a href='honeypot.php' class='hidden-link'>90% sale!</a>
 </footer>
 </body>
 </html>
