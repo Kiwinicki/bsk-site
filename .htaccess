@@ -1,18 +1,17 @@
 RewriteEngine On
 
-<FilesMatch "(\.htaccess|\.htpasswd|\.env)">
-    Order Allow,Deny
-    Deny from all
-</FilesMatch>
 
-# Allow access to /utils/contact.php
+# Allow access to /utils/contact.php & /utils/search.php
 RewriteCond %{REQUEST_URI} !^/utils/contact\.php$
+RewriteCond %{REQUEST_URI} !^/utils/search\.php$
 
 # Deny access to everything else in /utils
 RewriteRule ^utils/ - [F,L]
 
-RewriteRule ^sitemap\.xml$ sitemap.php [L]
-RewriteRule ^sitemap\.html$ /sitemap-html.php [L]
+<FilesMatch "(\.htaccess|\.htpasswd|\.env)">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
 
 # Block common scraping bots by User-Agent, whole list on: https://www.useragentstring.com/pages/useragentstring.php?typ=Crawler
 SetEnvIf User-Agent "libwww" block_bot
@@ -28,3 +27,43 @@ SetEnvIf User-Agent "Headless" block_bot
 
 Order Deny,Allow
 Deny from env=block_bot
+
+
+# CORS & Referer rules for search.php
+
+#<IfModule mod_headers.c>
+#    Header set X-Test-Header "mod_headers is enabled"
+#</IfModule>
+
+
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#
+#    # Ustawienie zmiennej środowiskowej dla domeny
+#    RewriteCond %{HTTP_HOST} ^(www\.)?([a-z0-9.-]+) [NC]
+#    RewriteRule ^ - [E=MYDOMAIN:%2]
+#    
+#    # Konfiguracja CORS z dynamiczną domeną
+#    Header set Access-Control-Allow-Origin "https://%{MYDOMAIN}e"
+#    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+#
+#    # Sprawdzanie Referer
+#    <Files "search.php">
+#        SetEnvIf Referer "^https://(www\.)?%{MYDOMAIN}e" allowed_referer
+#        Order Deny,Allow
+#        Deny from all
+#        Allow from env=allowed_referer
+#    </Files>
+#</IfModule>
+
+
+
+# --- NOT ANTI-SCRAPING RELATED --- 
+
+# Redirect "index.html" on direct requests only
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^index\.php$ / [R=302,L]
+
+# Change file extension for sitemaps
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+RewriteRule ^sitemap\.html$ /sitemap-html.php [L]
