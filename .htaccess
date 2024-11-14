@@ -1,6 +1,11 @@
 RewriteEngine On
 
 
+# Hide info about server
+Header unset X-Powered-By
+ServerSignature Off
+
+
 # Allow access to /utils/contact.php & /utils/search.php
 RewriteCond %{REQUEST_URI} !^/utils/contact\.php$
 RewriteCond %{REQUEST_URI} !^/utils/search\.php$
