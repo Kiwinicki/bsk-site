@@ -30,31 +30,25 @@ Deny from env=block_bot
 
 
 # CORS & Referer rules for search.php
+<IfModule mod_rewrite.c>
+    RewriteEngine On
 
-#<IfModule mod_headers.c>
-#    Header set X-Test-Header "mod_headers is enabled"
-#</IfModule>
+    # Ustawienie zmiennej środowiskowej dla domeny
+    RewriteCond %{HTTP_HOST} ^(www\.)?([a-z0-9.-]+) [NC]
+    RewriteRule ^ - [E=MYDOMAIN:%2]
+    
+    # Konfiguracja CORS z dynamiczną domeną
+    Header set Access-Control-Allow-Origin "https://%{MYDOMAIN}e"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
 
-
-#<IfModule mod_rewrite.c>
-#    RewriteEngine On
-#
-#    # Ustawienie zmiennej środowiskowej dla domeny
-#    RewriteCond %{HTTP_HOST} ^(www\.)?([a-z0-9.-]+) [NC]
-#    RewriteRule ^ - [E=MYDOMAIN:%2]
-#    
-#    # Konfiguracja CORS z dynamiczną domeną
-#    Header set Access-Control-Allow-Origin "https://%{MYDOMAIN}e"
-#    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
-#
-#    # Sprawdzanie Referer
-#    <Files "search.php">
-#        SetEnvIf Referer "^https://(www\.)?%{MYDOMAIN}e" allowed_referer
-#        Order Deny,Allow
-#        Deny from all
-#        Allow from env=allowed_referer
-#    </Files>
-#</IfModule>
+    # Sprawdzanie Referer
+    <Files "search.php">
+        SetEnvIf Referer "^https://(www\.)?%{MYDOMAIN}e" allowed_referer
+        Order Deny,Allow
+        Deny from all
+        Allow from env=allowed_referer
+    </Files>
+</IfModule>
 
 
 
