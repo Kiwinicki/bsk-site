@@ -31,6 +31,7 @@ function renderHeader($title = "Moderato - faster Allegro") {
     <header>
         <h1><a href='index.php'>Moderato</a></h1>
         <a href="about.php">About us</a>
+        <a href="humans.php">Humans only</a>
         <nav>
             <input type="text" id="search" placeholder="Search...">
             <div id="search-results"></div>  

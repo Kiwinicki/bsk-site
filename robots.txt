@@ -1,5 +1,5 @@
 User-agent: *
-Disallow: /
+Disallow: /humans.php
 
 User-agent: Googlebot
 Allow: /
