@@ -7,8 +7,8 @@ error_reporting(E_ALL);
 include_once 'env.php';
 
 function renderHeader($title = "Moderato - faster Allegro") {
-    global $captchaKey;
-    
+    global $captchaKey, $analyticsId;
+
     echo <<<HTML
 <!DOCTYPE html>
 <html lang='pl'>
@@ -25,6 +25,14 @@ function renderHeader($title = "Moderato - faster Allegro") {
         if (navigator.webdriver && !window.location.href.includes('/bot-detected.php')) {
             window.location.href = "/bot-detected.php"
         }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=$analyticsId"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '$analyticsId');
     </script>
 </head>
 <body>

@@ -13,6 +13,7 @@
     DB_NAME=products
     CAPTCHA_KEY=public_key
     CAPTCHA_SECRET=secret_key
+    ANALYTICS_ID=google_analytics_id
     ```
 
 ## Implemented things:
