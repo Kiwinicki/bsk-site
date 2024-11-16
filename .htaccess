@@ -38,7 +38,7 @@ Deny from env=block_bot
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Ustawienie zmiennej środowiskowej dla domeny
+    # Ustawienie zmiennej środowiskowej dla domeny (niezależne od nazwy domeny)
     RewriteCond %{HTTP_HOST} ^(www\.)?([a-z0-9.-]+) [NC]
     RewriteRule ^ - [E=MYDOMAIN:%2]
     

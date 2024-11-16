@@ -24,6 +24,7 @@
 - `robots.txt` (allowing only indexing bots like Googlebot)
 - honeypot (you need to set fail2ban on `/honeypot.php` visit)
 - `/humans.php` disallowed in `robots.txt` (you need to add it to fail2ban to check if any bot don't applies to it). Some indexing bots are able to visit this site but not `humans.php` and its a test if they respect `robots.txt`
+- CORS and Referer rules for `search.php` in `.htaccess` (prevent getting data directly from database without interaction with site)
 
 ## TODO:
 - make site security on toggle in `.env` file
@@ -45,5 +46,5 @@
         DOSBlockingPeriod 10    # Locking time in seconds
     </IfModule>
     ```
-    
+
 - fail2ban on enter to `humans.php`, `honeypot.php` pages
