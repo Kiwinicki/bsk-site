@@ -25,7 +25,7 @@ SetEnvIf User-Agent "wget" block_bot
 SetEnvIf User-Agent "curl" block_bot
 SetEnvIf User-Agent "Scrapy" block_bot
 SetEnvIf User-Agent "python-requests" block_bot
-SetEnvIf User-Agent "(Bot|bot)" block_bot
+# SetEnvIf User-Agent "(Bot|bot)" block_bot
 SetEnvIf User-Agent "(Crawler|crawler)" block_bot
 SetEnvIf User-Agent "HeadlessChrome" block_bot
 SetEnvIf User-Agent "Headless" block_bot

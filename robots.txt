@@ -1,11 +1,17 @@
 User-agent: *
-Disallow: /humans.php
+Disallow: /
 
 User-agent: Googlebot
 Allow: /
+Disallow: /humans.php
+Disallow: /honeypot.php
 
 User-agent: Bingbot
 Allow: /
+Disallow: /humans.php
+Disallow: /honeypot.php
 
 User-agent: Slurp
 Allow: /
+Disallow: /humans.php
+Disallow: /honeypot.php

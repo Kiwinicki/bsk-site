@@ -19,12 +19,31 @@
 ## Implemented things:
 - `.htaccess` with some bot user-agents blocked
 - reCAPTCHA on contact form `/about.php`
-- detecting webdriver (selenium) and redirecting to `bot-detected.php` (it looks like `index.php` but its filled with fake data)
+- detecting webdriver (selenium) and redirecting to `honeypot.php` (anything what goes there will be blocked)
 - sitemaps (html and xml)
 - `robots.txt` (allowing only indexing bots like Googlebot)
 - honeypot (you need to set fail2ban on `/honeypot.php` visit)
-- `/humans.php` disallowed in `robots.txt` (you need to add it to fail2ban to check if any bot don't applies to it)
+- `/humans.php` disallowed in `robots.txt` (you need to add it to fail2ban to check if any bot don't applies to it). Some indexing bots are able to visit this site but not `humans.php` and its a test if they respect `robots.txt`
 
 ## TODO:
-- google analitics
-- rate-limiting (include httpd.conf in repo)
+- make site security on toggle in `.env` file
+
+## Apache server settings (for Alpine Linux):
+- Enable `mod_rewrite`: in `/etc/apache2/httpd.conf` find and uncomment:
+
+    `LoadModule rewrite_module modules/mod_rewrite.so`
+
+- Rate-limiting
+    ```
+    # /etc/apache2/conf.d/mod_evasive.conf
+    <IfModule mod_evasive20.c>
+        DOSHashTableSize 3097
+        DOSPageCount 5          # Maximum number of requests per page
+        DOSSiteCount 100        # Maximum number of requests per site
+        DOSPageInterval 1.0     # Period in seconds for `DOSPageCount`.
+        DOSSiteInterval 1.0     # Period in seconds for a DOSSiteCount
+        DOSBlockingPeriod 10    # Locking time in seconds
+    </IfModule>
+    ```
+    
+- fail2ban on enter to `humans.php`, `honeypot.php` pages
