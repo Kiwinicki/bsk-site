@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 include_once 'env.php';
 
 function renderHeader($title = "Moderato - faster Allegro") {
-    global $captchaKey, $analyticsId;
+    global $captchaKey, $analyticsId, $secure;
 
     echo <<<HTML
 <!DOCTYPE html>
@@ -21,6 +21,9 @@ function renderHeader($title = "Moderato - faster Allegro") {
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://www.google.com/recaptcha/api.js?render=$captchaKey"></script>
+HTML;
+
+    if ($secure) echo <<<HTML
     <script>
         if ((
             navigator.webdriver ||
@@ -31,6 +34,8 @@ function renderHeader($title = "Moderato - faster Allegro") {
             window.location.href = "/honeypot.php"
         }
     </script>
+HTML;
+    echo <<<HTML
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=$analyticsId"></script>
     <script>
