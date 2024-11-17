@@ -2,8 +2,8 @@ RewriteEngine On
 
 
 # Hide info about server
-Header unset X-Powered-By
-ServerSignature Off
+#Header unset X-Powered-By
+#ServerSignature Off
 
 
 # Allow access to /utils/contact.php & /utils/search.php
@@ -19,41 +19,41 @@ RewriteRule ^utils/ - [F,L]
 </FilesMatch>
 
 # Block common scraping bots by User-Agent, whole list on: https://www.useragentstring.com/pages/useragentstring.php?typ=Crawler
-SetEnvIf User-Agent "libwww" block_bot
-SetEnvIf User-Agent "HTTrack" block_bot
-SetEnvIf User-Agent "wget" block_bot
-SetEnvIf User-Agent "curl" block_bot
-SetEnvIf User-Agent "Scrapy" block_bot
-SetEnvIf User-Agent "python-requests" block_bot
+# SetEnvIf User-Agent "libwww" block_bot
+# SetEnvIf User-Agent "HTTrack" block_bot
+# SetEnvIf User-Agent "wget" block_bot
+# SetEnvIf User-Agent "curl" block_bot
+# SetEnvIf User-Agent "Scrapy" block_bot
+# SetEnvIf User-Agent "python-requests" block_bot
 # SetEnvIf User-Agent "(Bot|bot)" block_bot
-SetEnvIf User-Agent "(Crawler|crawler)" block_bot
-SetEnvIf User-Agent "HeadlessChrome" block_bot
-SetEnvIf User-Agent "Headless" block_bot
+# SetEnvIf User-Agent "(Crawler|crawler)" block_bot
+# SetEnvIf User-Agent "HeadlessChrome" block_bot
+# SetEnvIf User-Agent "Headless" block_bot
 
-Order Deny,Allow
-Deny from env=block_bot
+# Order Deny,Allow
+# Deny from env=block_bot
 
 
 # CORS & Referer rules for search.php
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-
-    # Ustawienie zmiennej środowiskowej dla domeny (niezależne od nazwy domeny)
-    RewriteCond %{HTTP_HOST} ^(www\.)?([a-z0-9.-]+) [NC]
-    RewriteRule ^ - [E=MYDOMAIN:%2]
-    
-    # Konfiguracja CORS z dynamiczną domeną
-    Header set Access-Control-Allow-Origin "https://%{MYDOMAIN}e"
-    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
-
-    # Sprawdzanie Referer
-    <Files "search.php">
-        SetEnvIf Referer "^https://(www\.)?%{MYDOMAIN}e" allowed_referer
-        Order Deny,Allow
-        Deny from all
-        Allow from env=allowed_referer
-    </Files>
-</IfModule>
+# <IfModule mod_rewrite.c>
+#     RewriteEngine On
+# 
+#     # Ustawienie zmiennej środowiskowej dla domeny (niezależne od nazwy domeny)
+#     RewriteCond %{HTTP_HOST} ^(www\.)?([a-z0-9.-]+) [NC]
+#     RewriteRule ^ - [E=MYDOMAIN:%2]
+#     
+#     # Konfiguracja CORS z dynamiczną domeną
+#     Header set Access-Control-Allow-Origin "https://%{MYDOMAIN}e"
+#     Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+# 
+#     # Sprawdzanie Referer
+#     <Files "search.php">
+#         SetEnvIf Referer "^https://(www\.)?%{MYDOMAIN}e" allowed_referer
+#         Order Deny,Allow
+#         Deny from all
+#         Allow from env=allowed_referer
+#     </Files>
+# </IfModule>
 
 
 
