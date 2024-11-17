@@ -9,7 +9,7 @@ include_once './utils/env.php';
 
 renderHeader("Moderato - About us");
 
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$protocol = $_SERVER['HTTP_HOST'] == 'localhost' ? "http://" : "https://";
 $siteAddress = $protocol . $_SERVER['HTTP_HOST'];
 
 
