@@ -7,7 +7,7 @@ header("Content-Type: application/xml; charset=UTF-8");
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-$domain = "https://" . $_SERVER['HTTP_HOST'];
+$domain = "http://" . $_SERVER['HTTP_HOST'];
 $pages = [
     ['loc' => "$domain/", 'priority' => '1.0'],
     ['loc' => "$domain/about.php", 'priority' => '0.8'],
