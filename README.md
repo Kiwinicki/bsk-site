@@ -49,3 +49,5 @@
     ```
 
 - fail2ban on enter to `humans.php`, `honeypot.php` pages
+
+    Insert content of `fail2ban` folder in right place and setup fail2ban daemon
