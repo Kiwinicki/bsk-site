@@ -25,12 +25,7 @@ HTML;
 
     if ($secure) echo <<<HTML
     <script>
-        if ((
-            navigator.webdriver ||
-            window.outerWidth == 0 ||
-            window.outerHeight == 0) &&
-            !window.location.href.includes('/honeypot.php')
-        ) {
+        if (navigator.webdriver === true && !window.location.href.includes('/honeypot.php')) {
             window.location.href = "/honeypot.php"
         }
     </script>
